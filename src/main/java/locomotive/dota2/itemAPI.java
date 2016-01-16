@@ -10,9 +10,6 @@ public class itemAPI {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    static String[] JSONGetTemplate = {"url"};
-    static String[] JSONPostTemplate = {"url", "body"};
-
     public static JSONObject getPlayerItems(String apiKey, long steamID) {
         String action = "get contents of player backpack";
 
@@ -28,7 +25,8 @@ public class itemAPI {
                 "&format=" + format +
                 "&steamid=" + steamID;
 
-        JSONObject request = new JSONObject(JSONGetTemplate);
+        JSONObject request = new JSONObject();
+        request.put("action", action);
         request.put("url", url);
 
         return request;
@@ -48,7 +46,8 @@ public class itemAPI {
                 "key=" + apiKey +
                 "&format=" + format;
 
-        JSONObject request = new JSONObject(JSONGetTemplate);
+        JSONObject request = new JSONObject();
+        request.put("action", action);
         request.put("url", url);
 
         return request;
@@ -57,7 +56,8 @@ public class itemAPI {
     public static JSONObject getSchema(String url) {
         String action = "get schema contents";
 
-        JSONObject request = new JSONObject(JSONGetTemplate);
+        JSONObject request = new JSONObject();
+        request.put("action", action);
         request.put("url", url);
 
         return request;

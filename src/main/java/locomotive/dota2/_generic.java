@@ -11,9 +11,6 @@ public class _generic {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    static String[] JSONGetTemplate = {"url"};
-    static String[] JSONPostTemplate = {"url", "body"};
-
     public static JSONObject getGeneric(String apiKey, String param) {
         String action = "send generic request to api";
 
@@ -30,6 +27,7 @@ public class _generic {
                 "&param=" + param;
 
         JSONObject request = new JSONObject();
+        request.put("action", action);
         request.put("url", url);
 
         return request;

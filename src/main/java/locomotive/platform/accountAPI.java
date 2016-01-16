@@ -11,9 +11,6 @@ public class accountAPI {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    static String[] JSONGetTemplate = {"url"};
-    static String[] JSONPostTemplate = {"url", "body"};
-
     public static JSONObject resolveVanityURL(String apiKey, String vanityURLName) throws Exception {
         String action = "resolve vanity URL";
 
@@ -29,7 +26,8 @@ public class accountAPI {
                 "&format=" + format +
                 "&vanityurl=" + vanityURLName;
 
-        JSONObject request = new JSONObject(JSONGetTemplate);
+        JSONObject request = new JSONObject();
+        request.put("action", action);
         request.put("url", url);
 
         return request;
