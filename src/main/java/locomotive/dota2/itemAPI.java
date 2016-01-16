@@ -1,9 +1,6 @@
-package common.dota2;
+package locomotive.dota2;
 
-import common.VDF;
-import common.apiManager;
-import common.network.Response;
-import common.network.requester;
+import locomotive.apiManager;
 import org.json.JSONObject;
 
 /**
@@ -13,7 +10,10 @@ public class itemAPI {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    public static JSONObject getPlayerItems(String apiKey, long steamID) throws Exception {
+    static String[] JSONGetTemplate = {"url"};
+    static String[] JSONPostTemplate = {"url", "body"};
+
+    public static JSONObject getPlayerItems(String apiKey, long steamID) {
         String action = "get contents of player backpack";
 
         String methodGroup = "IEconItems_570";
@@ -27,16 +27,14 @@ public class itemAPI {
                 "key=" + apiKey +
                 "&format=" + format +
                 "&steamid=" + steamID;
-//        System.out.println(url);
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: ");
 
-        return new JSONObject(response.body);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
+
+        return request;
     }
 
-    public static JSONObject getSchemaURL(String apiKey) throws Exception {
+    public static JSONObject getSchemaURL(String apiKey) {
         String action = "get URL to current schema";
 
         String methodGroup = "IEconItems_570";
@@ -50,21 +48,18 @@ public class itemAPI {
                 "key=" + apiKey +
                 "&format=" + format;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: ");
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return new JSONObject(response.body);
+        return request;
     }
 
-    public static JSONObject getSchema(String URL) throws Exception {
+    public static JSONObject getSchema(String url) {
         String action = "get schema contents";
 
-        Response response = requester.sendGet(URL);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        JSONObject schema = VDF.toJSONObject(response.body, true);
-
-        return schema;
+        return request;
     }
 }

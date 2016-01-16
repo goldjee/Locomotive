@@ -1,8 +1,7 @@
-package common.dota2;
+package locomotive.dota2;
 
-import common.apiManager;
-import common.network.Response;
-import common.network.requester;
+import locomotive.apiManager;
+import org.json.JSONObject;
 
 /**
  * Created by Ins on 02.11.2015.
@@ -12,7 +11,10 @@ public class matchAPI {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    public static String getRealtimeStats(String apiKey, long serverSteamID) throws Exception {
+    static String[] JSONGetTemplate = {"url"};
+    static String[] JSONPostTemplate = {"url", "body"};
+
+    public static JSONObject getRealtimeStats(String apiKey, long serverSteamID) {
         String action = "get realtime stats";
 
         String methodGroup = "IDOTA2MatchStats_570";
@@ -27,15 +29,13 @@ public class matchAPI {
                 "&format=" + format +
                 "&server_steam_id=" + String.valueOf(serverSteamID);
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
 
-    public static String getLeagueListing(String apiKey) throws Exception {
+    public static JSONObject getLeagueListing(String apiKey) {
         String action = "get leagues";
 
         String methodGroup = "IDOTA2Match_570";
@@ -49,15 +49,13 @@ public class matchAPI {
                 "key=" + apiKey +
                 "&format=" + format;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
 
-    public static String getLiveLeagueGames(String apiKey) throws Exception {
+    public static JSONObject getLiveLeagueGames(String apiKey) {
         String action = "get live league games";
 
         String methodGroup = "IDOTA2Match_570";
@@ -71,14 +69,12 @@ public class matchAPI {
                 "key=" + apiKey +
                 "&format=" + format;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
-    public static String getLiveLeagueGames(String apiKey, int leagueID) throws Exception {
+    public static JSONObject getLiveLeagueGames(String apiKey, int leagueID) {
         String action = "get live league games";
 
         String methodGroup = "IDOTA2Match_570";
@@ -93,14 +89,12 @@ public class matchAPI {
                 "&format=" + format +
                 "&league_id=" + leagueID;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
-    public static String getLiveLeagueGames(String apiKey, int leagueID, long matchID) throws Exception {
+    public static JSONObject getLiveLeagueGames(String apiKey, int leagueID, long matchID) {
         String action = "get live league games";
 
         String methodGroup = "IDOTA2Match_570";
@@ -116,15 +110,13 @@ public class matchAPI {
                 "&league_id=" + leagueID +
                 "&match_id=" + matchID;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
 
-    public static String getMatchDetails(String apiKey, long matchID) throws Exception {
+    public static JSONObject getMatchDetails(String apiKey, long matchID) {
         String action = "get match details";
 
         String methodGroup = "IDOTA2Match_570";
@@ -139,11 +131,9 @@ public class matchAPI {
                 "&format=" + format +
                 "&match_id=" + matchID;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: HTTP code " + response.status);
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return response.body;
+        return request;
     }
 }

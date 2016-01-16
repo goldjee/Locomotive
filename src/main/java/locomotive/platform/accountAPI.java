@@ -1,8 +1,6 @@
-package common.platform;
+package locomotive.platform;
 
-import common.apiManager;
-import common.network.Response;
-import common.network.requester;
+import locomotive.apiManager;
 import org.json.JSONObject;
 
 /**
@@ -12,6 +10,9 @@ public class accountAPI {
 
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
+
+    static String[] JSONGetTemplate = {"url"};
+    static String[] JSONPostTemplate = {"url", "body"};
 
     public static JSONObject resolveVanityURL(String apiKey, String vanityURLName) throws Exception {
         String action = "resolve vanity URL";
@@ -28,11 +29,9 @@ public class accountAPI {
                 "&format=" + format +
                 "&vanityurl=" + vanityURLName;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: ");
+        JSONObject request = new JSONObject(JSONGetTemplate);
+        request.put("url", url);
 
-        return new JSONObject(response.body);
+        return request;
     }
 }

@@ -1,8 +1,6 @@
-package common.dota2;
+package locomotive.dota2;
 
-import common.apiManager;
-import common.network.Response;
-import common.network.requester;
+import locomotive.apiManager;
 import org.json.JSONObject;
 
 /**
@@ -13,7 +11,10 @@ public class _generic {
     static String apiBase = apiManager.apiBase;
     static String format = apiManager.format;
 
-    public static JSONObject getGeneric(String apiKey, String param) throws Exception {
+    static String[] JSONGetTemplate = {"url"};
+    static String[] JSONPostTemplate = {"url", "body"};
+
+    public static JSONObject getGeneric(String apiKey, String param) {
         String action = "send generic request to api";
 
         String methodGroup = "";
@@ -28,11 +29,9 @@ public class _generic {
                 "&format=" + format +
                 "&param=" + param;
 
-        Response response = requester.sendGet(url);
-        // handle response statuses
-        if (!response.status.equals("200"))
-            throw new Exception("Failed to " + action + ". Reason: ");
+        JSONObject request = new JSONObject();
+        request.put("url", url);
 
-        return new JSONObject(response.body);
+        return request;
     }
 }
