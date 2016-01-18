@@ -246,7 +246,7 @@ public class matchAPI {
         String action = "get latest matches by their record sequence";
 
         String methodGroup = "IDOTA2Match_570";
-        String method = "GetMatchHistory";
+        String method = "GetMatchHistoryBySequenceNum";
         String version = "v1";
 
         String url = apiBase +
