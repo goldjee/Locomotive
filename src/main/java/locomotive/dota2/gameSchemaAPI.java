@@ -54,5 +54,48 @@ public class gameSchemaAPI {
         return request;
     }
 
+    public static JSONObject getGameItems(String apiKey) {
+        String action = "get up-to-date list of items";
+
+        String methodGroup = "IEconDOTA2_570";
+        String method = "GetGameItems";
+        String version = "v1";
+
+        String url = apiBase +
+                methodGroup + "/" +
+                method + "/" +
+                version + "/?" +
+                "key=" + apiKey +
+                "&format=" + format;
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
+    public static JSONObject getGameItems(String apiKey, String language) {
+        // language - en_us for example
+        String action = "get up-to-date list of items";
+
+        String methodGroup = "IEconDOTA2_570";
+        String method = "GetGameItems";
+        String version = "v1";
+
+        String url = apiBase +
+                methodGroup + "/" +
+                method + "/" +
+                version + "/?" +
+                "key=" + apiKey +
+                "&format=" + format +
+                "&language=" + language;
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
+
 
 }
