@@ -97,5 +97,41 @@ public class gameSchemaAPI {
         return request;
     }
 
+    // non-api prepared requests for dota2/jsfeed
 
+    public static JSONObject getGameItemData() {
+        String action = "get item detailed info";
+
+        String url = "http://www.dota2.com/jsfeed/itemdata";
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
+
+    public static JSONObject getHeroAbilityData() {
+        String action = "get hero ability detailed info";
+
+        String url = "http://www.dota2.com/jsfeed/abilitydata";
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
+
+    public static JSONObject getHeroPickerData() {
+        String action = "get hero info intended for hero picker";
+
+        String url = "http://www.dota2.com/jsfeed/heropickerdata";
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
 }
