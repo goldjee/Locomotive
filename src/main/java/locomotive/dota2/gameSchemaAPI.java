@@ -134,4 +134,17 @@ public class gameSchemaAPI {
 
         return request;
     }
+
+    public static JSONObject getHeroPediaData(String feed) {
+        // feed: itemdata, herodata, abilitydata
+        String action = "get detailed data from heropedia";
+
+        String url = "http://www.dota2.com/jsfeed/heropickerdata?feeds=" + feed;
+
+        JSONObject request = new JSONObject();
+        request.put("action", action);
+        request.put("url", url);
+
+        return request;
+    }
 }
